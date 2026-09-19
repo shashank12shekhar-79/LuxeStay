@@ -42,7 +42,7 @@ router.post("/",validateListing,wrapAsync(async(req,res)=>{
 //show route
 router.get("/:id",wrapAsync(async(req,res)=>{
 let data=req.params;
-let property=await Listing.findById(data.id).populate("reviews").populate("owner");
+let property=await Listing.findById(data.id).populate({path:"reviews",populate:{path:"author"}}).populate("owner");
 if(!property)
 {
     req.flash("error","Property Doesn't Exist!");
@@ -50,7 +50,7 @@ if(!property)
 }
 else
 {
-    console.log(property)
+    console.log(property.reviews)
     res.render("show.ejs",{property});
 }
 }));

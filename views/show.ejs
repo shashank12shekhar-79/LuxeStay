@@ -80,22 +80,25 @@
                                     <hr>
 
                                     <h5 class="mb-3"><b>All Reviews</b></h5>
+                                    
                                     <div class="row">
                                         <% for(review of property.reviews){ %>
                                             <div class="card ms-3 col-5 mb-3">
                                                 <div class="card-body">
-                                                    <h6 class="text-muted">
-                                                        <%= review.author %>
+                                                    <h6 class="">
+                                                        @<%= review.author.username %>
                                                     </h6>
                                                     <p class="mb-1">
                                                         <%= review.comment %>
                                                     </p>
                                                     <p class="mb-0">Rating: <%= review.rating %>/5</p>
+                                                    <% if(currUser && (currUser._id.equals(property.owner._id)|| currUser._id.equals(review.author._id ))){ %>
                                                     <form
                                                         action="/listing/<%= property.id %>/review/<%= review.id %>?_method=DELETE"
                                                         method="post" class="mb-3 mt-3">
                                                         <button class="btn btn-sm btn-dark">Delete</button>
                                                     </form>
+                                                    <% } %>
                                                 </div>
                                             </div>
                                             <% } %>

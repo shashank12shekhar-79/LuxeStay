@@ -6,7 +6,7 @@ const {listingSchema}=require("../schema.js");
 const {reviewSchema}=require("../schema.js");
 const Listing=require("../models/listing.js")
 const Review=require("../models/review.js");
-const {isLoggedIn} = require("../middleware.js");
+const {isLoggedIn,isReviewAuthor} = require("../middleware.js");
 const validateReviews = (req, res, next) => {
 const { error } = reviewSchema.validate(req.body);
 if (error) {
@@ -26,6 +26,7 @@ router.post("/",validateReviews,isLoggedIn,wrapAsync(async(req,res)=>{
 console.log(req.body)
 let listing = await Listing.findById(req.params.id);
 let newReview = new Review(req.body.review);
+newReview.author = req.user._id;
 listing.reviews.push(newReview);
 await newReview.save();
 await listing.save();
@@ -34,7 +35,7 @@ req.flash("success","Review Added!");
 res.redirect(`/listing/${listing.id}`);
 })) 
 //Delete Route
-router.delete("/:reviewId",isLoggedIn,wrapAsync(async(req,res)=>{
+router.delete("/:reviewId",isLoggedIn,isReviewAuthor,wrapAsync(async(req,res)=>{
     let{id,reviewId} = req.params;
     await Listing.findByIdAndUpdate(id,{$pull : {review:reviewId}});
     await Review.findByIdAndDelete(reviewId);
