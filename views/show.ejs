@@ -1,0 +1,107 @@
+<% layout("/layout/boilerplate") %>
+
+    <div class="row mt-3">
+        <div class="col-8 offset-2">
+            <h3><b>
+                    <%= property.title %>
+                </b></h3>
+            <div class="card shadow-sm img-class show-card listing-card">
+                <img src="<%= property.image %>" class="card-img-top show-img" alt="Property Image">
+
+                <div class="card-body">
+                    <p>Owner:- <b>
+                            <%= property.owner.username %>
+                        </b></p>
+                    <p class="card-text mb-2">
+                        <%= property.description %>
+                    </p>
+
+                    <p class="mb-1">
+                        <strong>Price:</strong>
+                        &#8377;<%= property.price.toLocaleString("en-IN") %>/Night
+                    </p>
+
+                    <p class="mb-1">
+                        <strong>Location:</strong>
+                        <%= property.location %>
+                    </p>
+
+                    <p class="mb-3">
+                        <strong>Country:</strong>
+                        <%= property.country %>
+                    </p>
+                    <% if(currUser && currUser._id.equals(property.owner._id)){ %>
+                        <div class="d-flex gap-2">
+                            <a href="/listing/<%= property.id %>/edit" class="btn btn-dark edit-btn">
+                                Edit
+                            </a>
+
+                            <form action="/listing/<%= property.id %>?_method=DELETE" method="POST">
+                                <button class="btn btn-danger">
+                                    Delete
+                                </button>
+                            </form>
+                        </div>
+                        <% } %>
+                            <hr>
+                            <% if(currUser){ %>
+                                <h4>Leave Review</h4>
+
+                                <form action="/listing/<%= property.id %>/review" method="POST" novalidate
+                                    class="needs-validation">
+
+                                    <div class="mb-3">
+                                        <label for="rating" class="form-label">Rate Us</label>
+
+                                        <input type="range" min="1" max="5" class="form-control" id="rating"
+                                            name="review[rating]">
+
+                                        <div class="valid-feedback">Thanks!</div>
+                                        <div class="invalid-feedback">Rate Us Fairly!</div>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="comment" class="form-label">Comment</label>
+
+                                        <textarea class="form-control" id="comment" name="review[comment]" rows="3"
+                                            placeholder="Write about us!" required></textarea>
+
+                                        <div class="invalid-feedback">
+                                            Comment About Us!
+                                        </div>
+                                    </div>
+
+                                    <button class="btn btn-outline-dark">
+                                        Submit
+                                    </button>
+
+                                </form>
+                                <% } %>
+                                    <hr>
+
+                                    <h5 class="mb-3"><b>All Reviews</b></h5>
+                                    <div class="row">
+                                        <% for(review of property.reviews){ %>
+                                            <div class="card ms-3 col-5 mb-3">
+                                                <div class="card-body">
+                                                    <h6 class="text-muted">
+                                                        <%= review.author %>
+                                                    </h6>
+                                                    <p class="mb-1">
+                                                        <%= review.comment %>
+                                                    </p>
+                                                    <p class="mb-0">Rating: <%= review.rating %>/5</p>
+                                                    <form
+                                                        action="/listing/<%= property.id %>/review/<%= review.id %>?_method=DELETE"
+                                                        method="post" class="mb-3 mt-3">
+                                                        <button class="btn btn-sm btn-dark">Delete</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                            <% } %>
+                                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>

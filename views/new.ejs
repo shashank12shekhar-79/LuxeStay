@@ -1,0 +1,101 @@
+<% layout("/layout/boilerplate") %>
+
+<body>
+    <br />
+    <div class="row">
+        <div class="col-8 offset-2">
+            <h1 class="mb-4">List Your Property</h1>
+            <form action="/listing" method="POST" novalidate class="needs-validation" >
+                <div class="mb-3">
+                    <label for="title" class="form-label">Property Title</label>
+                    <input
+                        type="text"
+                        class="form-control"
+                        id="title"
+                        name="listing[title]"
+                        placeholder="Enter Title"
+                        required
+                    />
+                    <div class="valid-feedback">Looks good!</div>
+                    <div class="invalid-feedback">Add title!</div>
+                </div>
+                <div class="mb-3">
+                    <label for="description" class="form-label">Description</label>
+                    <textarea
+                        class="form-control"
+                        id="description"
+                        name="listing[description]"
+                        rows="3"
+                        placeholder="Description"
+                        required
+                    ></textarea>
+                    <div class="invalid-feedback">Add concise description!</div>
+                </div>
+                <div class="mb-3">
+                    <label for="image" class="form-label">Image URL</label>
+                    <input
+                        type="text"
+                        class="form-control"
+                        id="image"
+                        name="listing[image]"
+                        placeholder="Enter Image Link"
+                    />
+                </div>
+                <div class="row">
+                    <div class="mb-3 col-md-4">
+                        <label for="price" class="form-label">
+                            Rent Amount
+                        </label>
+                        <input
+                            class="form-control"
+                            id="price"
+                            name="listing[price]"
+                            placeholder="Rent Amount"
+                            required
+                        />
+                        <div class="invalid-feedback">
+                            Enter Valid Price
+                        </div>
+                    </div>
+                    <div class="mb-3 col-md-8">
+                        <label for="location" class="form-label">
+                            Location
+                        </label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            id="location"
+                            name="listing[location]"
+                            placeholder="Location"
+                           required
+                        />
+                        <div class="invalid-feedback">
+                            Enter Valid Location
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="country" class="form-label">
+                        Country 
+                    </label>
+                    <input
+                        type="text"
+                        class="form-control"
+                        id="country"
+                        name="listing[country]"
+                        placeholder="Country"
+                        required
+                    />
+                    <div class="invalid-feedback">
+                        Enter Valid Country
+                    </div>
+                </div>
+                <br />
+                <button type="submit" class="btn btn-dark add-btn">
+                    Add
+                </button>
+            </form>
+        </div>
+    </div>
+    <br />
+</body>

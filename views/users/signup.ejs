@@ -1,0 +1,53 @@
+<% layout("/layout/boilerplate") %>
+<body>
+    <br />
+    <div class="row">
+        <div class="col-6 offset-3">
+            <h1 class="mb-2 offset-4">Sign Up</h1>
+            <form action="/signup" method="post" novalidate class="needs-validation" >
+                <div class="mb-3">
+                    <label for="username" class="form-label">username</label>
+                    <input
+                        type="text"
+                        class="form-control"
+                        id="username"
+                        name="user[username]"
+                        placeholder="Enter Username"
+                        required
+                    />
+                    <div class="valid-feedback">Looks good!</div>
+                    <div class="invalid-feedback">Enter Unique Username</div>
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">email</label>
+                    <input
+                        type="text"
+                        class="form-control"
+                        id="email"
+                        name="user[email]"
+                        placeholder="Enter E-mail ID"
+                        required
+                    />
+                    <div class="invalid-feedback">E-mail is required</div>
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">password</label>
+                    <input
+                        type="password"
+                        class="form-control"
+                        id="password"
+                        name="user[password]"
+                        placeholder="set password"
+                        required
+                    />
+                    <div class="valid-feedback">Looks good!</div>
+                    <div class="invalid-feedback">Set Strong Password</div>
+                </div>
+                <button type="submit" class="btn btn-success">
+                    signup
+                </button>
+            </form>
+        </div>
+    </div>
+    <br />
+</body>
