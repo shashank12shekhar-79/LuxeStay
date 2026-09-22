@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 const path = require("path");
-const port = 100;
+const port = 8080;
 const methodOverride = require("method-override");
 const mongoose = require("mongoose");
 const Listing = require("./models/listing.js");
@@ -85,3 +85,4 @@ app.use((err, req, res, next) => {
 app.listen(port, (req, res) => {
   console.log(`Server Working On ${port}`);
 });
+

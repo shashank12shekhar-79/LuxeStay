@@ -88,29 +88,242 @@ body {
     border: none !important;
 }
 
+/* =========================================================
+   LUXESTAY — SHOW PAGE
+   Uses existing EJS/class names only
+========================================================= */
 
-/* show page */
-/* show page */
+.show-card {
+    padding-left: 0;
+    padding-right: 0;
+    border: 0;
+    border-radius: 16px;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.08);
+}
 
-.show-img{
+.show-img {
+    display: block;
     width: 100%;
-    height: 50vh;
+    height: 52vh;
+    min-height: 350px;
+    max-height: 600px;
     object-fit: cover;
 }
 
-.show-card{
-    padding-left: 0;
-    padding-right: 0;
+.show-card > .card-body {
+    padding: 1.6rem;
 }
 
-.btns{
+.show-card h3 {
+    margin: 0 0 1.1rem;
+    color: #222;
+    font-size: 1.75rem;
+    font-weight: 600;
+    letter-spacing: -0.2px;
+}
+
+.show-card p {
+    margin-bottom: .55rem;
+    color: #555;
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+.show-card p b,
+.show-card p strong {
+    color: #222;
+}
+
+.show-card hr {
+    margin: 1.7rem 0;
+    border: 0;
+    border-top: 1px solid #e5e5e5;
+    opacity: 1;
+}
+
+/* Owner action buttons.
+   Your EJS currently uses d-flex gap-2, so style that existing class combination. */
+.show-card .d-flex.gap-2 {
+    margin-top: 1rem;
+    align-items: center;
+}
+
+.show-card .edit-btn,
+.show-card .btn-danger {
+    border-radius: 8px;
+    padding: 8px 18px;
+    font-weight: 500;
+    transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.show-card .edit-btn:hover,
+.show-card .btn-danger:hover {
+    transform: translateY(-1px);
+}
+
+/* Kept for any existing use elsewhere. */
+.btns {
     display: flex;
-    gap: 1rem;
+    gap: .75rem;
+    align-items: center;
 }
 
-.card-body{
-    padding: 1rem;
+.show-card h4 {
+    margin-bottom: 1rem;
+    color: #222;
+    font-size: 1.4rem;
+    font-weight: 600;
 }
+
+.show-card h5 {
+    margin-bottom: 1rem;
+    color: #222;
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.show-card .form-label {
+    margin-bottom: 7px;
+    color: #333;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.show-card textarea {
+    width: 100%;
+    border: 1px solid #d8d8d8;
+    border-radius: 9px;
+    padding: 12px 14px;
+    font-size: 14px;
+    resize: vertical;
+    transition: border-color .2s ease, box-shadow .2s ease;
+}
+
+.show-card textarea:focus {
+    border-color: #222;
+    box-shadow: 0 0 0 3px rgba(0, 0, 0, .06);
+}
+
+.show-card form > .btn-outline-dark {
+    border-radius: 8px;
+    padding: 8px 20px;
+    font-weight: 500;
+}
+
+/* Only spacing/hover styling here.
+   Starability's actual dimensions, sprites and rating widths stay in rating.css. */
+.show-card .starability-basic {
+    margin: 4px 0 10px;
+}
+
+.show-card .starability-basic > label {
+    transition: transform .15s ease;
+}
+
+.show-card .starability-basic > label:hover {
+    transform: scale(1.06);
+}
+
+.show-card .starability-result {
+    margin: 5px 0 8px;
+}
+
+/* Reviews */
+.show-card .row > .card {
+    margin-left: .5rem;
+    padding: 0;
+    border: 1px solid #e2e2e2;
+    border-radius: 12px;
+    background: #fff;
+    transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.show-card .row > .card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 7px 20px rgba(0, 0, 0, .07);
+}
+
+.show-card .row > .card .card-body {
+    padding: 1.15rem;
+}
+
+.show-card .row > .card h6 {
+    margin-bottom: 7px;
+    color: #222;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.show-card .row > .card .mb-1 {
+    color: #555;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.show-card .row > .card .btn-dark {
+    border-radius: 7px;
+    padding: 5px 13px;
+    font-size: 12px;
+}
+
+.show-card .row {
+    row-gap: 15px;
+}
+
+@media (max-width: 768px) {
+    .show-img {
+        height: 40vh;
+        min-height: 270px;
+    }
+
+    .show-card > .card-body {
+        padding: 1.2rem;
+    }
+
+    .show-card h3 {
+        font-size: 1.5rem;
+    }
+
+    .show-card h4 {
+        font-size: 1.3rem;
+    }
+
+    .show-card h5 {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .show-card {
+        border-radius: 10px;
+    }
+
+    .show-img {
+        height: 280px;
+        min-height: 280px;
+    }
+
+    .show-card > .card-body {
+        padding: 1rem;
+    }
+
+    .show-card h3 {
+        font-size: 1.35rem;
+    }
+
+    .show-card .d-flex.gap-2,
+    .btns {
+        flex-wrap: wrap;
+    }
+
+    .show-card .row > .card {
+        width: calc(100% - 1rem);
+        margin-left: .5rem;
+    }
+}
+
 /* .box
     width: 90%;
     max-width: 1400px;
