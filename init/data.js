@@ -232,5 +232,14 @@ const sampleListings = [
     country: "Costa Rica",
 },
 ];
+// Convert old image string into the new schema format
+sampleListings.forEach((listing) => {
+    if (typeof listing.image === "string") {
+        listing.image = {
+            url: listing.image,
+            filename: "listing-image"
+        };
+    }
+});
 
 module.exports = { data: sampleListings };
