@@ -19,7 +19,6 @@ module.exports.showListing = async (req, res) => {
     req.flash("error", "Property Doesn't Exist!");
     res.redirect("/");
   } else {
-    console.log(property.reviews);
     res.render("show.ejs", { property });
   }
 };
@@ -28,8 +27,11 @@ module.exports.addListing = async (req, res) => {
   let data = req.body;
   const newListing = new Listing(data.listing);
   newListing.owner = req.user._id;
+  newListing.image.url = req.file.path;
+  newListing.image.filename = req.file.filename;
+  console.log(req.file.path)
   await newListing.save();
-  console.log(data);
+  
   req.flash("success", "New Listing Added!");
   res.redirect("/listing");
 };
@@ -46,7 +48,14 @@ module.exports.renderEditForm = async (req, res) => {
 
 module.exports.updateListing = async (req, res) => {
   let { id } = req.params;
-  await Listing.findByIdAndUpdate(id, req.body.listing);
+  let listing = await Listing.findByIdAndUpdate(id, {...req.body.listing});
+  if(typeof req.file !== "undefined")
+  {
+    listing.image.url = req.file.path;
+    listing.image.filename = req.file.filename;
+    console.log(listing)
+    await listing.save();
+  }
   req.flash("success", "Updated Successfully!");
   res.redirect(`/listing/${id}`);
 };

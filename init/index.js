@@ -1,25 +1,81 @@
+require("dotenv").config();
+
 const mongoose = require("mongoose");
+
 const Listing = require("../models/listing");
-const Review = require("../models/review");
+const User = require("../models/user");
 const initData = require("./data");
 
-
-main()
-  .then(() => console.log("connected to DB"))
-  .catch((err) => console.log(err));
-
-async function main() {
-  await mongoose.connect(process.env.MONGO_URI);
+// MongoDB connection
+async function connectDB() {
+    try {
+        await mongoose.connect(process.env.MONGO_URI);
+        console.log("✅ Connected to MongoDB");
+    } catch (error) {
+        console.error("❌ MongoDB connection failed:");
+        console.error(error.message);
+        process.exit(1);
+    }
 }
 
-const initDB = async () => {
-  await Listing.deleteMany({});
-  initData.data=initData.data.map((obj)=>({
-    ...obj,owner:"6a89f3ba2e61309d5b2a81d6"
-    
-  }));
-  await Listing.insertMany(initData.data);
-  console.log("data was initialized with synthetic reviews");
-};
+// Initialize database
+async function initDB() {
+    try {
+        // Connect to database
+        await connectDB();
 
+        // Owner ID
+        const ownerId = "6a89f3ba2e61309d5b2a81d6";
+
+        // Check owner exists
+        const owner = await User.findById(ownerId);
+
+        if (!owner) {
+            console.error("❌ Owner user not found!");
+            console.error(`User ID: ${ownerId}`);
+            return;
+        }
+
+        console.log(`✅ Owner found: ${owner.username || owner._id}`);
+
+        // Delete existing listings
+        await Listing.deleteMany({});
+        console.log("🗑️ Existing listings deleted");
+
+        // Prepare listing data
+        const listings = initData.data.map((listing) => ({
+            ...listing,
+
+            // Convert old image URL format to new schema format
+            image:
+                typeof listing.image === "string"
+                    ? {
+                          url: listing.image,
+                          filename: "listing-image",
+                      }
+                    : listing.image,
+
+            // Add owner
+            owner: owner._id,
+
+            // Ensure reviews starts as an empty array
+            reviews: [],
+        }));
+
+        // Insert listings
+        await Listing.insertMany(listings);
+
+        console.log(`✅ ${listings.length} listings inserted successfully`);
+        console.log("🎉 Database initialization completed!");
+    } catch (error) {
+        console.error("❌ Database initialization failed:");
+        console.error(error);
+    } finally {
+        // Close MongoDB connection
+        await mongoose.connection.close();
+        console.log("🔌 MongoDB connection closed");
+    }
+}
+
+// Run initialization
 initDB();

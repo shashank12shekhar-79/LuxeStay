@@ -14,15 +14,8 @@ const listingSchema = new Schema({
   },
 
   image: {
-    type: String,
-
-    default:
-      "https://graciasresort.com/blogs/wp-content/uploads/2024/02/beach-side-resorts-in-goa.jpg",
-
-    set: (v) =>
-      v === ""
-        ? "https://graciasresort.com/blogs/wp-content/uploads/2024/02/beach-side-resorts-in-goa.jpg"
-        : v,
+    url : String,
+    filename : String
   },
 
   price: Number,
