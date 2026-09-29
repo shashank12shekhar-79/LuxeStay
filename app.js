@@ -54,13 +54,13 @@ main()
 const store = new MongoStore({
   mongoUrl: process.env.MONGO_URL,
   crypto: {
-    secret: "1695"
+    secret: process.env.SECRET
   },
   touchAfter: 24 * 3600,
 });
 const sessionOptions = {
   store : store,
-  secret: "1695",
+  secret: process.env.SECRET,
   resave: false,
   saveUninitialized: true,
   cookie: {
