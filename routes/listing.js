@@ -14,6 +14,10 @@ router
   .post(validateListing,
     upload.single('listing[image]'), 
     wrapAsync(listingController.addListing));
+router.get(
+  "/search",
+  wrapAsync(listingController.filterListing),
+);
 router.get("/new", isLoggedIn, wrapAsync(listingController.renderNewForm));
 router
   .route("/:id")

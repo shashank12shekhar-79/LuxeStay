@@ -1,7 +1,87 @@
 <% layout("/layout/boilerplate") %>
+<style>
+    #filters{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        width: 100%;
+        
+    }
+    .filter{
+        text-align: center;
+        margin-top: 2rem;
+        opacity: 0.7;
+    }
+    .filter:hover{
+        opacity: 1;
+        cursor: pointer;
+    }
+    .filter p{
+        font-size: 1rem;
+    }
+    a{
+        color: black;
+        text-decoration: none;
+    }
+</style>
 <body>
-    <h1>All Listings</h1>
-    <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1">
+    <div id="filters">
+        <div class="filter">
+            <a href="/listing/search?category=Trending">
+                <div><i class="fa-solid fa-fire-flame-curved"></i></div>
+                <p>Trending</p>
+            </a>
+        </div>
+        <div class="filter">
+            <a href="/listing/search?category=Rooms">
+                <div><i class="fa-solid fa-hotel"></i></div>
+                <p>Rooms</p>
+            </a>
+        </div>
+        <div class="filter">
+            <a href="/listing/search?category=Iconic cities">
+                <div><i class="fa-solid fa-monument"></i></div>
+                <p>iconic cities</p>
+            </a>
+        </div>
+        <div class="filter">
+            <a href="/listing/search?category=Mountains">
+                <div><i class="fa-solid fa-mountain-city"></i></div>
+                <p>Mountains</p>
+            </a>
+        </div>
+        <div class="filter">
+            <a href="/listing/search?category=Castles">
+                <div><i class="fa-brands fa-fort-awesome"></i></div>
+                <p>Castles</p>
+            </a>
+        </div>
+        <div class="filter">
+            <a href="/listing/search?category=Amazing pools">
+                <div><i class="fa-solid fa-person-swimming"></i></div>
+                <p>Amazing pools</p>
+            </a>
+        </div>
+        <div class="filter">
+            <a href="/listing/search?category=Camping">
+                <div><i class="fa-solid fa-campground"></i></div>
+                <p>Camping</p>
+            </a>
+        </div>
+        <div class="filter">
+            <a href="/listing/search?category=Farms">
+                <div><i class="fa-solid fa-seedling"></i></div>
+                <p>Farms</p>
+            </a>
+        </div>
+        <div class="filter">
+            <a href="/listing/search?category=Arctic">
+                <div><i class="fa-solid fa-person-snowboarding"></i></div>
+                <p>Arctic</p>
+            </a>
+        </div>
+    </div>
+    <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 mt-3">
         <% for(list of allListing){ %>
             <a class="listing-link" href="/listing/<%= list.id %>">
             <div class="card col listing-card">

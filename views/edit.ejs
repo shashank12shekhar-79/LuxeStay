@@ -1,70 +1,259 @@
+```ejs
 <% layout("/layout/boilerplate") %>
+
     <form action="/listing/<%= data.id %>?_method=PUT" method="post" novalidate class="needs-validation"
         enctype="multipart/form-data">
         <div class="row">
             <div class="col-8 offset-2">
+
                 <h1 class="mb-4">Update Details!</h1>
+
+                <!-- Title -->
                 <div class="mb-3">
-                    <label for="title" class="form-label">listing Title</label>
+                    <label for="title" class="form-label">
+                        Listing Title
+                    </label>
 
-                    <input type="text" name="listing[title]" value="<%= data.title %>" class="form-control" required />
+                    <input type="text" id="title" name="listing[title]" value="<%= data.title %>" class="form-control"
+                        required />
 
-                    <div class="valid-feedback">Looks good!</div>
-                    <div class="invalid-feedback">Add title!</div>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+
+                    <div class="invalid-feedback">
+                        Add title!
+                    </div>
                 </div>
 
-                <div class="mb-3">
-                    <label for="description" class="form-label">Description</label>
 
-                    <textarea name="listing[description]" class="form-control"
+                <!-- Description -->
+                <div class="mb-3">
+                    <label for="description" class="form-label">
+                        Description
+                    </label>
+
+                    <textarea id="description" name="listing[description]" class="form-control"
                         required><%= data.description %></textarea>
 
-                    <div class="invalid-feedback">Add concise description!</div>
+                    <div class="invalid-feedback">
+                        Add concise description!
+                    </div>
                 </div>
+
+
+                <!-- Existing Image -->
                 <div class="row row-cols-lg-1 row-cols-md-1 row-cols-sm-1">
                     <div class="card col listing-card">
                         <img src="<%= data.image.url %>" class="card-img-top" alt="Property_Image"
                             style="height: 20rem;">
                     </div>
                 </div>
+
+
+                <!-- Update Image -->
                 <div class="mb-3">
-                    <label for="image" class="form-label">Update Image</label>
+                    <label for="image" class="form-label">
+                        Update Image
+                    </label>
 
-                    <input type="file" name="listing[image]" value="<%= data.image %>" class="form-control" required />
+                    <input type="file" id="image" name="listing[image]" value="<%= data.image %>"
+                        class="form-control" />
 
-                    <div class="invalid-feedback">Upload Images</div>
+                    <div class="invalid-feedback">
+                        Upload Images
+                    </div>
                 </div>
 
+
+                <!-- Price + House Number -->
                 <div class="row">
 
                     <div class="mb-3 col-md-4">
-                        <label for="price" class="form-label">Rent Amount</label>
+                        <label for="price" class="form-label">
+                            Rent Amount
+                        </label>
 
-                        <input type="number" name="listing[price]" value="<%= data.price %>" class="form-control"
-                            required />
+                        <input type="number" id="price" name="listing[price]" value="<%= data.price %>"
+                            class="form-control" required />
 
-                        <div class="invalid-feedback">Enter Valid Price</div>
+                        <div class="invalid-feedback">
+                            Enter Valid Price
+                        </div>
                     </div>
+
 
                     <div class="mb-3 col-md-8">
-                        <label for="location" class="form-label">Location</label>
+                        <label for="houseNumber" class="form-label">
+                            House Number
+                        </label>
 
-                        <input type="text" name="listing[location]" value="<%= data.location %>" class="form-control"
-                            required />
+                        <input type="text" id="houseNumber" name="listing[location][houseNumber]"
+                            value="<%= data.location.houseNumber %>" class="form-control"
+                            placeholder="Enter House number/Flat number" required />
 
-                        <div class="invalid-feedback">Location should be valid</div>
+                        <div class="invalid-feedback">
+                            Enter valid house or flat number
+                        </div>
                     </div>
 
                 </div>
 
-                <div class="mb-3">
-                    <label for="country" class="form-label">Country</label>
 
-                    <input type="text" name="listing[country]" value="<%= data.country %>" class="form-control"
-                        required />
+                <!-- Street + Locality + City -->
+                <div class="row">
 
-                    <div class="invalid-feedback">Country name should be valid</div>
+                    <div class="mb-3 col-md-7">
+                        <label for="street" class="form-label">
+                            Street
+                        </label>
+
+                        <input type="text" id="street" name="listing[location][street]"
+                            value="<%= data.location.street %>" class="form-control" placeholder="Street/Village Name"
+                            required />
+
+                        <div class="invalid-feedback">
+                            Enter Street details
+                        </div>
+                    </div>
+
+
+                    <div class="mb-3 col-md-3">
+                        <label for="locality" class="form-label">
+                            Landmark / Locality
+                        </label>
+
+                        <input type="text" id="locality" name="listing[location][locality]"
+                            value="<%= data.location.locality %>" class="form-control" placeholder="LandMark..."
+                            required />
+
+                        <div class="invalid-feedback">
+                            Add Landmark
+                        </div>
+                    </div>
+
+
+                    <div class="mb-3 col-md-2">
+                        <label for="city" class="form-label">
+                            City
+                        </label>
+
+                        <input type="text" id="city" name="listing[location][city]" value="<%= data.location.city %>"
+                            class="form-control" placeholder="City..." required />
+
+                        <div class="invalid-feedback">
+                            Add city details
+                        </div>
+                    </div>
+
                 </div>
+
+
+                <!-- State + Country + Pincode -->
+                <div class="row">
+
+                    <div class="mb-3 col-md-4">
+                        <label for="state" class="form-label">
+                            State
+                        </label>
+
+                        <input type="text" id="state" name="listing[location][state]" value="<%= data.location.state %>"
+                            class="form-control" placeholder="State..." required />
+
+                        <div class="invalid-feedback">
+                            Add state details
+                        </div>
+                    </div>
+
+
+                    <div class="mb-3 col-md-4">
+                        <label for="country" class="form-label">
+                            Country
+                        </label>
+
+                        <input type="text" id="country" name="listing[location][country]"
+                            value="<%= data.location.country %>" class="form-control" placeholder="Country..."
+                            required />
+
+                        <div class="invalid-feedback">
+                            Add country details
+                        </div>
+                    </div>
+
+
+                    <div class="mb-3 col-md-4">
+                        <label for="pincode" class="form-label">
+                            Pincode
+                        </label>
+
+                        <input type="text" id="pincode" name="listing[location][pincode]"
+                            value="<%= data.location.pincode %>" class="form-control" placeholder="Pincode..."
+                            required />
+
+                        <div class="invalid-feedback">
+                            Add pincode
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <!-- Category -->
+                <div class="mb-3">
+                    <label for="category" class="form-label">
+                        Add Category
+                    </label>
+
+                    <select id="category" class="form-select form-select-sm" name="listing[category]"
+                        aria-label="Small select example" required>
+
+                        <option selected>
+                            <%= data.category %>
+                        </option>
+
+                        <option value="Trending">
+                            Trending
+                        </option>
+
+                        <option value="Rooms">
+                            Rooms
+                        </option>
+
+                        <option value="Iconic cities">
+                            Iconic cities
+                        </option>
+
+                        <option value="Mountains">
+                            Mountains
+                        </option>
+
+                        <option value="Castles">
+                            Castles
+                        </option>
+
+                        <option value="Amazing pools">
+                            Amazing pools
+                        </option>
+
+                        <option value="Camping">
+                            Camping
+                        </option>
+
+                        <option value="Farms">
+                            Farms
+                        </option>
+
+                        <option value="Arctic">
+                            Arctic
+                        </option>
+
+                    </select>
+
+                    <div class="invalid-feedback">
+                        Select Category of Listing!
+                    </div>
+                </div>
+
 
                 <br />
 
@@ -72,7 +261,6 @@
                     Submit
                 </button>
 
+            </div>
+        </div>
     </form>
-    </div>
-    </div>
-    </div>
