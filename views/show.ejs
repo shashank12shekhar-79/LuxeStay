@@ -1,6 +1,7 @@
 <% layout("/layout/boilerplate") %>
 <script>
-    let mapToken="<%= process.env.MAP_TOKEN %>";
+    const mapToken="<%= process.env.MAP_TOKEN %>"
+    const coordinates=<%- JSON.stringify(property.geometry.coordinates)%>
 </script>
 <div class="row mt-3">
     <div class="col-8 offset-2">
@@ -11,8 +12,8 @@
                 <p>Owner: <b><%= property.owner.username %></b></p>
                 <p class="card-text mb-2"><%= property.description %></p>
                 <p class="mb-1"><strong>Price:</strong> &#8377;<%= property.price.toLocaleString("en-IN") %>/Night</p>
-                <p class="mb-1"><strong>Location:</strong> <%= property.location %></p>
-                <p class="mb-3"><strong>Country:</strong> <%= property.country %></p>
+                <p class="mb-1"><strong>Location:</strong> <%= address %></p>
+                <p class="mb-3"><strong>Country:</strong> <%= property.location.country %></p>
                 <% if (currUser && currUser._id.equals(property.owner._id)) { %>
                     <div class="d-flex gap-2">
                         <a href="/listing/<%= property.id %>/edit" class="btn btn-dark edit-btn">Edit</a>

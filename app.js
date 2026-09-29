@@ -18,6 +18,7 @@ const listingsRouter = require("./routes/listing.js");
 const reviewsRouter = require("./routes/review.js");
 const userRouter = require("./routes/user.js");
 const session = require("express-session");
+const MongoStore = require("connect-mongo").default;
 const flash = require("connect-flash");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
@@ -32,9 +33,16 @@ app.use(express.json());
 app.use(methodOverride("_method"));
 app.engine("ejs", ejsMate);
 
+const dns = require("dns");
+
+dns.setServers([
+  "8.8.8.8",
+  "1.1.1.1"
+]);
+
 
 async function main() {
-  await mongoose.connect(process.env.MONGO_URI);
+  await mongoose.connect(process.env.MONGO_URL);
 }
 main()
   .then((res) => {
@@ -43,8 +51,15 @@ main()
   .catch((err) => {
     console.log(err);
   });
-
+const store = new MongoStore({
+  mongoUrl: process.env.MONGO_URL,
+  crypto: {
+    secret: "1695"
+  },
+  touchAfter: 24 * 3600,
+});
 const sessionOptions = {
+  store : store,
   secret: "1695",
   resave: false,
   saveUninitialized: true,

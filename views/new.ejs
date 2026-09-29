@@ -58,38 +58,138 @@
                         </div>
                     </div>
                     <div class="mb-3 col-md-8">
-                        <label for="location" class="form-label">
-                            Location
+                        <label for="houseNumber" class="form-label">
+                            House Number
                         </label>
                         <input
                             type="text"
                             class="form-control"
-                            id="location"
-                            name="listing[location]"
-                            placeholder="Location"
+                            id="houseNumber"
+                            name="listing[location][houseNumber]"
+                            placeholder="Enter House number/Flat number"
                            required
                         />
-                        <div class="invalid-feedback">
-                            Enter Valid Location
-                        </div>
+                    </div>
+                <div class="mb-3 col-md-7">
+                    <label for="street" class="form-label">
+                        street 
+                    </label>
+                    <input
+                        type="text"
+                        class="form-control"
+                        id="street"
+                        name="listing[location][street]"
+                        placeholder="Street/Village Name"
+                        required
+                    />
+                    <div class="invalid-feedback">
+                        Enter Street details
+                    </div>
+                
+                </div>
+                <div class="mb-3 col-md-3">
+                    <label for="locality" class="form-label">
+                        Landmark/Locality 
+                    </label>
+                    <input
+                        type="text"
+                        class="form-control"
+                        id="locality"
+                        name="listing[location][locality]"
+                        placeholder="LandMark..."
+                        required
+                    />
+                    <div class="invalid-feedback">
+                        Add Landmark
                     </div>
                 </div>
-                <div class="mb-3">
+                <div class="mb-3 col-md-2">
+                    <label for="city" class="form-label">
+                        city 
+                    </label>
+                    <input
+                        type="text"
+                        class="form-control"
+                        id="city"
+                        name="listing[location][city]"
+                        placeholder="city..."
+                        required
+                    />
+                    <div class="invalid-feedback">
+                        Add city details
+                    </div>
+                </div>
+                <div class="mb-3 col-md-4">
+                    <label for="state" class="form-label">
+                        state 
+                    </label>
+                    <input
+                        type="text"
+                        class="form-control"
+                        id="state"
+                        name="listing[location][state]"
+                        placeholder="state..."
+                        required
+                    />
+                    <div class="invalid-feedback">
+                        Add state details
+                    </div>
+                </div>
+                <div class="mb-3 col-md-4">
                     <label for="country" class="form-label">
-                        Country 
+                        country 
                     </label>
                     <input
                         type="text"
                         class="form-control"
                         id="country"
-                        name="listing[country]"
-                        placeholder="Country"
+                        name="listing[location][country]"
+                        placeholder="country..."
                         required
                     />
                     <div class="invalid-feedback">
-                        Enter Valid Country
+                        Add country details
                     </div>
                 </div>
+                <div class="mb-3 col-md-4">
+                    <label for="pincode" class="form-label">
+                        pincode 
+                    </label>
+                    <input
+                        type="text"
+                        class="form-control"
+                        id="pincode"
+                        name="listing[location][pincode]"
+                        placeholder="pincode..."
+                        required
+                    />
+                    <div class="invalid-feedback">
+                        Add pincode
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="category" class="form-label">
+                        Add Category 
+                    </label>
+                    <select  class="form-select form-select-sm"
+                        name="listing[category]" 
+                        aria-label="Small select example"
+                        required
+                        >
+                        <option selected disabled>Choose Category</option>
+                        <option value="Trending">Trending</option>
+                        <option value="Rooms">Rooms</option>
+                        <option value="Iconic cities">Iconic cities</option>
+                        <option value="Mountains">Mountains</option>
+                        <option value="Castles">Castles</option>
+                        <option value="Amazing pools">Amazing pools</option>
+                        <option value="Camping">Camping</option>
+                        <option value="Farms">Farms</option>
+                        <option value="Arctic">Arctic</option>
+                    </select>
+                    <div class="invalid-feedback">
+                       Select Category of Listing!
+                    </div>
                 <br />
                 <button type="submit" class="btn btn-dark add-btn">
                     Add
